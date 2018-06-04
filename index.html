@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>My first Angular ptoject</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body ng-app="myApp">
+
+    <div class="container" ng-controller="kontrolerTabeliSkoczkow">
+        <div cass="row">
+            <div class="col-sm-8 center-block">
+                <h1 class="text-center">Klasyfikacja {{skoczkowie.length}} szkoczków narciarskich</h1>
+
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="input-group">
+                            <span class="input-group-addon">Szukaj:</span>
+                            <input type="input" class="form-control" placeholder="Wpisz coś.." ng-model="wyszukiwarka">
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">
+                            Dodaj skoczka
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+
+                                        <div class="form-group">
+                                            <label>NAZWISKO i Imię skoczka:</label>
+                                            <input type="text" class="form-control" ng-model="nazwiskoSkoczka">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Narodowość:</label>
+                                            <input type="text" class="form-control" ng-model="narodowoscSkoczka">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Miejsce w rankingu:</label>
+                                            <input type="text" class="form-control" ng-model="miejsceSkoczka">
+                                        </div>
+                                        <div class="form-group">
+                                                <label>Punkty:</label>
+                                                <input type="text" class="form-control" ng-model="punktySkoczka">
+                                            </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Wróć</button>
+                                        <button type="button" class="btn btn-primary" ng-click="dodajSkoczka()">Dodaj skoczka</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th ng-repeat="name in [
+                            'Imię', 'Narodowość', 'Miejsce', 'Punkty', 'Usuń'
+                            ]">{{name}}</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr ng-repeat="skoczek in skoczkowie | filter : wyszukiwarka">
+                                <td>
+                                    {{skoczek.Name}}
+                                    <button ng-click="edycja = ! edycja" class="btn btn-xs">
+                                        <span ng-if="!edycja">edycja</span>
+                                        <span ng-if="edycja">zapisz</span>
+                                    </button>
+                                    <input type="tekst" class="form-control" ng-if="edycja" ng-model="skoczek.Name">
+                                </td>
+                                <td>{{skoczek.Nation}}</td>
+                                <td>{{skoczek.rank}}</td>
+                                <td>{{skoczek.pts}}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-xs" ng-click="usunSkoczka('$index')">&times</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ======= JavaScript ====== -->
+    <script type="text/javascript" src="js/script.js"></script>
+
+    <!-- Angular-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+    <script type="text/javascript" src="js/aplication.js"></script>
+
+    <!-- jQuery -->
+    <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+
+    <!-- Bootstrap -->
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+
+
+
+</body>
+
+</html>
